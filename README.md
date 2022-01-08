@@ -38,9 +38,15 @@ Desenvolvido com:
 
 <hr>
 # Como executar
-as aplicações precisam ser inicializadas manualmente com
 
-> npm start
+1. primeiro clone o repositório
+    > git clone https://github.com/OtavioNegrizolli/gazin-fullstack.git
+
+2. entre nas pastas do front e backend e instale as dependencias com
+    > npm i
+
+3. as aplicações precisam ser inicializadas manualmente com
+    > npm start
 
 e é necessária a criação de um arquivo .env na raiz do projeto backend contendo as definições das variaveis para o banco de dados
 
