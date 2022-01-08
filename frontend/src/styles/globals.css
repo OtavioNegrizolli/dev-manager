@@ -1,0 +1,71 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,700;1,200&display=swap');
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  font: 400 14px Montserrat -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+*, input, button {
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+}
+
+#__next {
+  padding: 0;
+  margin: 0;
+  border: none;
+  width: 100vw;
+  height: 100vh;
+  overflow: auto;
+}
+
+.table thead th {
+    padding-left: 5px;
+}
+
+.form-control {
+    height: calc(1.5em + .5rem + 2px);
+}
+
+div.form-control {
+    border: none !important;
+}
+
+div.color-primary {
+   background-color: #0d6efd;
+   color: #fff;
+}
+
+:not(div).color-primary {
+   color: #0d6efd;
+}
+
+div.color-secondary {
+   background-color: #3593ff;
+   color: #fff;
+}
+
+:not(div).color-secondary {
+   color: #3593ff;
+}
+
+div.color-danger {
+   background-color: #cc0000;
+   color: #fff;
+}
+
+:not(div).color-danger {
+   color: #cc0000;
+}

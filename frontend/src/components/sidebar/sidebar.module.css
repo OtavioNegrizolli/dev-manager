@@ -1,0 +1,32 @@
+.sidebar {
+    display: flex;
+    display: none;
+    flex-direction: column;
+    height: calc(100vh - 50px);
+    width: 25%;
+    max-width: 300px;
+    background-color: rgb(37, 114, 207);
+    background: linear-gradient(rgb(37, 114, 207) 70%, rgb(27, 124, 212));
+    box-shadow: 0 2px 5px #0008;
+}
+
+.moduleLinks {
+    padding: 5px;
+    color: #fff;
+}
+
+.moduleLinks h1 {
+    text-transform: uppercase;
+    font-size: 16px;
+}
+
+.moduleLinks ul {
+    list-style: none;
+    padding: 0;
+    padding-left: 10px;
+}
+
+.moduleLinks ul li {
+    padding: 0;
+    font-weight: 600;
+}

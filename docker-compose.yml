@@ -1,0 +1,43 @@
+version: "3.7"
+services:
+    ### DATABASE ###
+    db:
+        image: postgres:14.1
+        container_name: postgres
+        environment:
+            POSTGRES_PASSWORD: 123456
+            POSTGRES_USER: postgres
+            POSTGRES_DB: gazin
+        networks:
+            - backend
+
+
+    ### BACKEND ###
+    backend:
+        build: ./backend
+        container_name: nest_backend
+        ports:
+            - "3001:3001"
+        depends_on:
+            - db
+        networks:
+            - backend
+            - frontend
+        command: npm start
+
+
+    ### FRONTEND ###
+    frontend:
+        build: ./frontend
+        container_name: nextjs_front
+        ports:
+            - "3000:3000"
+        depends_on:
+            - backend
+        networks:
+            - frontend
+        command: npm start
+
+networks:
+    backend:
+    frontend:

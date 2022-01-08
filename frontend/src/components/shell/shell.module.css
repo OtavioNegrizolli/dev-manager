@@ -1,0 +1,26 @@
+.container {
+  margin-top: 50px;
+  display: flex;
+  background-color: rgb(255, 255, 255);
+  background: linear-gradient(#f0f0f0, #fcfcfc);
+  height: calc(100% - 50px);
+}
+
+.content {
+  margin: 0 auto;
+  background-color: #fff;
+  height: 100%;
+  max-width: 1080px;
+  width: 75%;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0px 0px 5px #0002;
+  padding: 1.5%;
+  padding-top: 20px;
+}
+
+@media screen and (max-width: 1080px) {
+    .content {
+        width: 100%;
+    }
+}

@@ -1,0 +1,35 @@
+
+.tbody tr  {
+    vertical-align: middle;
+}
+.tbody tr > * {
+    padding-top: 3px;
+    padding-bottom: 3px;
+}
+.tbody tr td[colspan] {
+    text-align: center;
+}
+
+.tbody tr td[width] {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    overflow: hidden;
+}
+
+.tbody tr {
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.actions a {
+    padding-right: 5px;
+    padding-left: 5px;
+}
+
+.thead th div {
+    white-space: nowrap;
+}
+.thead th:not(:last-of-type):hover {
+    background-color: #0004;
+}
+

@@ -1,0 +1,125 @@
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    padding-left: 10px;
+    padding-right: 10px;
+    background-color: rgb(31, 98, 183);
+    background: linear-gradient(
+        90.29deg, rgb(9, 80, 169) -5.25%, rgb(31, 98, 183) 105.42%);
+    color: #fff;
+    box-shadow: 0 2px 5px #0007;
+    z-index: 100;
+}
+
+.header .logo {
+    height: 50px;
+    overflow: hidden;
+}
+
+.header .logo img {
+    height: 40px;
+    width: 100px;
+    /* margin-top: -16%; */
+    background-position: top;
+    background-size: cover;
+}
+
+.content {
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+    margin: 0 auto;
+    width: 75%;
+    max-width: 1080px;
+}
+.title {
+    padding: 0;
+    margin: 0;
+    margin-left: 50px;
+}
+
+.nav {
+    letter-spacing: .2px;
+    display: flex;
+    height: 100%;
+}
+
+.nav .menu > label {
+    text-transform: uppercase;
+}
+
+.nav .menu {
+    align-items: center;
+    position: relative;
+    display: flex;
+    height: 100%;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.nav .menu ul::before {
+    content: '';
+    position: absolute;
+    display: block;
+    width: 15px;
+    height: 15px;
+    top: 0%;
+    left: 15px;
+    transform: rotate(45deg) translate(-50%);
+    background-color: #fff;
+}
+
+.nav .menu:hover > label {
+    border-bottom: 1px solid #fff8;
+}
+
+.nav .menu:hover {
+    background-color: #0003;
+}
+
+.nav .menu:hover ul {
+    display: block;
+    animation-delay: 1s, 250ms;
+    /* a-property: display, none; */
+}
+
+.nav .menu ul {
+    display: none;
+    position: absolute;
+    list-style: none;
+    top: 75%;
+    transform: translateY(10px);
+    color: #559;
+    background-color: #fff;
+    box-shadow: 0 0 5px #0008;
+    padding: 10px 25px 10px 20px;
+
+}
+
+.nav .menu ul li {
+    display: block;
+    white-space: nowrap;
+}
+
+.nav .menu ul li:not(:last-of-type) {
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.nav .menu ul li + li {
+    margin-top: 5px;
+}
+
+.nav .menu + .menu {
+    margin-left: 15px;
+}
+
+@media screen and (max-width: 1080px) {
+    .content {
+        width: 100%;
+    }
+}
