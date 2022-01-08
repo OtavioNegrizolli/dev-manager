@@ -40,9 +40,8 @@ Desenvolvido com:
 # Como executar
 
 1. primeiro clone o repositório
-    > git clone https://github.com/OtavioNegrizolli/gazin-fullstack.git
-
-2. entre nas pastas do front e backend e instale as dependencias com
+    > git clone https://github.com/OtavioNegrizolli/dev-manager.git
+2. entre nas pastas do front e backend e instale as dependencias, individualmente, com o comando:
     > npm i
 
 3. as aplicações precisam ser inicializadas manualmente com
