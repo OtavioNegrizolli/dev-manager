@@ -17,10 +17,10 @@ export class DeveloperService {
 
     public async create(createDeveloperDto: CreateDeveloperDTO)
     {
-        await this.validateName(createDeveloperDto.name);
+        this.validateName(createDeveloperDto.name);
         await this.validateLevel(createDeveloperDto.level);
-        await this.validateGender(createDeveloperDto.gender);
-        await this.validateBirthDate(createDeveloperDto.birthDate);
+        this.validateGender(createDeveloperDto.gender);
+        this.validateBirthDate(createDeveloperDto.birthDate);
 
         // hobby: string
         const developer = new Developer();
@@ -90,14 +90,13 @@ export class DeveloperService {
 
     public async update(id: number, updateDeveloperDto: UpdateDeveloperDTO): Promise<ResponseDeveloperDTO>
     {
-        await this.validateName(updateDeveloperDto.name);
-        await this.validateName(updateDeveloperDto.name);
-        await this.validateLevel(updateDeveloperDto.level);
-        await this.validateGender(updateDeveloperDto.gender);
-        await this.validateBirthDate(updateDeveloperDto.birthDate);
+        this.validateName(updateDeveloperDto.name);
+        await  this.validateLevel(updateDeveloperDto.level);
+        this.validateGender(updateDeveloperDto.gender);
+        this.validateBirthDate(updateDeveloperDto.birthDate);
 
         if ( !(await this.repository.find( { id })) )
-        throw new InvalidDataError(`Não foi possível o nível com id: ${id}!`);
+            throw new InvalidDataError(`Não foi possível o nível com id: ${id}!`);
 
         const developer: Developer = {
             id:        id,
@@ -130,7 +129,7 @@ export class DeveloperService {
 
     }
 
-    private async validateGender(gender: string)
+    private validateGender(gender: string)
     {
         if ( !gender )
             throw new InvalidDataError('Informar o sexo é obrigatório');
@@ -138,9 +137,9 @@ export class DeveloperService {
             throw new InvalidDataError('O sexo informado é inválido');
     }
 
-    private async validateBirthDate(birthDate: Date)
+    private validateBirthDate(birthDate: Date)
     {
-        if ( birthDate > new Date() )
+        if ( !birthDate )
             throw  new InvalidDataError('A data de nacimento é obrigatória!');
         if ( birthDate > new Date() )
             throw new InvalidDataError('A data de nascimento não pode ser posterio ao dia atual');
@@ -153,7 +152,7 @@ export class DeveloperService {
             throw new InvalidDataError(`Não foi encontrado nenhum nível com id: ${id}`);
     }
 
-    private async validateName(name: string) {
+    private validateName(name: string) {
         if (!name || name.trim().length === 0)
             throw new InvalidDataError('O nome não pode estar em branco!');
 
