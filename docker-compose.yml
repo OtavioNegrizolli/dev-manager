@@ -4,6 +4,7 @@ services:
     db:
         image: postgres:14.1
         container_name: postgres
+        restart: always
         environment:
             POSTGRES_PASSWORD: 123456
             POSTGRES_USER: postgres
@@ -20,16 +21,20 @@ services:
             - "3001:3001"
         depends_on:
             - db
+        restart: always
+        volumes:
+          - ./backend:/usr/backend
         networks:
             - backend
             - frontend
-        command: npm start
-
+        command: npm run dev
 
     ### FRONTEND ###
     frontend:
         build: ./frontend
         container_name: nextjs_front
+        volumes:
+          - ./frontend:/usr/frontend
         ports:
             - "3000:3000"
         depends_on:
@@ -40,4 +45,5 @@ services:
 
 networks:
     backend:
+
     frontend:

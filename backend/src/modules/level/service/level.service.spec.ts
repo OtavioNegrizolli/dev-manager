@@ -6,6 +6,7 @@ import { ILevelRepository } from '../../../database/repository/level.repository'
 import { LevelService } from './level.service';
 import { MAX_NAME_LENGTH } from '../../../shared/utils/constants';
 import { UpdateLevelDTO } from '../dto/update-level.dto';
+import { NotFoundException } from '@nestjs/common';
 
 describe('LevelService', () => {
     const nameThatAlreadyExisits = 'already existing name';
@@ -127,8 +128,10 @@ describe('LevelService', () => {
         });
     });
 
-    it('Must return a not null list', async () => {
-        await expect(service.findAll()).resolves.toBeInstanceOf(Array);
+    it('should return a null when a nothing is found', async () => {
+        await expect(service.findAll({ name: 'a name that don\'t existis!'}))
+            .rejects
+            .toMatchObject( new NotFoundException('Nenhum registro foi encontrado!'));
     });
 
     // it( '', async () => {

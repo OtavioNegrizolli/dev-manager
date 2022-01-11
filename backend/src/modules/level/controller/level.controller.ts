@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, HttpCode, Query } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, HttpCode, Query, ValidationPipe } from '@nestjs/common';
 import { HttpStatusCode } from '@shared/utils/http-status-code';
 import { CreateLevelDTO } from '../dto/create-level.dto';
 import { UpdateLevelDTO } from '../dto/update-level.dto';
@@ -10,7 +10,7 @@ export class LevelController {
 
     @Post()
     @HttpCode(HttpStatusCode.CREATED)
-    public async create(@Body() createLevelDto: CreateLevelDTO) {
+    public async create(@Body(ValidationPipe) createLevelDto: CreateLevelDTO) {
         return await this.levelService.create(createLevelDto);
     }
 
