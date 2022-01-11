@@ -15,7 +15,7 @@ export class DeveloperService {
         private levelsRepository: ILevelRepository
     ) { }
 
-    public async create(createDeveloperDto: CreateDeveloperDTO)
+    public async create(createDeveloperDto: CreateDeveloperDTO): Promise<ResponseDeveloperDTO>
     {
         this.validateName(createDeveloperDto.name);
         await this.validateLevel(createDeveloperDto.level);
@@ -32,7 +32,15 @@ export class DeveloperService {
 
         const registredDeveloper = await this.repository.save(developer);
 
-        return registredDeveloper;
+        return {
+            id: registredDeveloper.id,
+            name: registredDeveloper.name,
+            level_id: registredDeveloper.level_id,
+            level: registredDeveloper.level?.name,
+            gender: registredDeveloper.gender,
+            birthDate: registredDeveloper.birthDate,
+            hobby: registredDeveloper.hobby
+        };
     }
 
     public async findAll(
@@ -114,7 +122,8 @@ export class DeveloperService {
             birthDate: developer.birthDate,
             gender: developer.gender,
             level_id: developer.level_id,
-            level: developer.level?.name
+            level: developer.level?.name,
+            hobby: developer.hobby
         };
     }
 

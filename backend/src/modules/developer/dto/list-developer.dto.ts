@@ -1,3 +1,5 @@
+import { Developer } from "../../../entities/developer.entity";
+
 export interface ResponseDeveloperDTO {
     id: number;
     name: string;
