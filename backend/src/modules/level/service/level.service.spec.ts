@@ -133,9 +133,4 @@ describe('LevelService', () => {
             .rejects
             .toMatchObject( new NotFoundException('Nenhum registro foi encontrado!'));
     });
-
-    // it( '', async () => {
-    //     await expect(service.update()).resolves.not.toThrow();
-    // });
-
 });
