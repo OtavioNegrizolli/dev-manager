@@ -84,6 +84,7 @@ export class LevelService {
             throw new InvalidDataError(`Não existe nível com o id: ${id}`);
         if (levelToBeDeleted.developers && levelToBeDeleted.developers.length > 0)
             throw new ServiceUnavailableException('Este nível está sendo usado por desenvolvedores ativos!');
+
         this.repository.delete(levelToBeDeleted);
 
     }

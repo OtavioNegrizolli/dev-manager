@@ -6,20 +6,24 @@ import { ILevelRepository } from '../../../database/repository/level.repository'
 import { LevelService } from './level.service';
 import { MAX_NAME_LENGTH } from '../../../shared/utils/constants';
 import { UpdateLevelDTO } from '../dto/update-level.dto';
-import { NotFoundException } from '@nestjs/common';
+import { NotFoundException, ServiceUnavailableException } from '@nestjs/common';
+import { async } from 'rxjs';
 
 describe('LevelService', () => {
-    const nameThatAlreadyExisits = 'already existing name';
-    const levelsRepositoryMock = {
-        save: (level: Level) => { level.id = 1; return level; },
-        find: (_: Partial<Level>) => null,
-        findAll: () => ([]),
-        update: (level) => ( new Promise( (r, _) => { r(null); }))
-    };
+    let nameThatAlreadyExisits = 'already existing name';
+    let levelsRepositoryMock;
 
     let service: LevelService;
 
-    beforeEach(async () => {
+    beforeEach( async () => {
+        levelsRepositoryMock = {
+            save: (level: Level) => { level.id = 1; return level; },
+            find: (_: Partial<Level>) => ({id:1, name: 'test subject'}),
+            findAll: () => ([]),
+            update: async (_:any) => (null),
+            delete: async (_:any) => (null)
+        };
+
         const module: TestingModule = await Test.createTestingModule({
             providers: [ILevelRepository, LevelService],
         })
@@ -29,11 +33,11 @@ describe('LevelService', () => {
         service = module.get<LevelService>(LevelService);
     });
 
-    it('should be defined', () => {
+    it( 'should be defined', () => {
         expect(service).toBeDefined();
     });
     // on create
-    describe('on creation', () =>
+    describe( 'on creation', () =>
     {
         it('should throw "InvalidDataError" when the name is passed as null', async () => {
             const nullNameCreateLevelDTO: CreateLevelDTO = { name: null };
@@ -61,10 +65,20 @@ describe('LevelService', () => {
             await expect(service.create(areadyExistingNameCreateLevelDTO)).rejects
                 .toMatchObject(new InvalidDataError('O nome informado já pertence a um nível!'));
         });
-    })
+
+        it('should create a new level and return it with it\'s generated id', async () => {
+            const validLevel: CreateLevelDTO = { name: 'Valid level' };
+            levelsRepositoryMock.find = (_:any) => (null);
+
+            await expect(service.create(validLevel)).resolves.toEqual({
+                id: expect.any(Number),
+                ...validLevel
+            });
+        });
+    });
 
     // update
-    describe('on update', () =>
+    describe( 'on update', () =>
     {
         const validId_for_test = 1;
         beforeEach(() => {
@@ -118,19 +132,35 @@ describe('LevelService', () => {
         });
     });
 
-    // listing
-    it('should create a new level and return it with it\'s generated id', async () => {
-        const validLevel: CreateLevelDTO = { name: 'Valid level' };
+    describe( 'on remove', () => {
+        it('should throw "InvalidDataError" when the id don\'t belong to any register', async () => {
+            const invalidLevelId = 0;
+            levelsRepositoryMock.find = (_:any) => (null);
 
-        await expect(service.create(validLevel)).resolves.toEqual({
-            id: expect.any(Number),
-            ...validLevel
+            await expect(service.remove(invalidLevelId)).rejects
+                .toMatchObject(new InvalidDataError(`Não existe nível com o id: ${invalidLevelId}`));
+        });
+
+        it('should throw "ServiceUnavailableException" when the have at least one developer', async () => {
+            const levelWhitDevsId = 1;
+            levelsRepositoryMock.find = (_:any) => ( {id: 1, developers: [{ name: 'this is suposed to be a dev of this level' }] });
+
+            await expect(service.remove(levelWhitDevsId)).rejects
+                .toMatchObject(new ServiceUnavailableException('Este nível está sendo usado por desenvolvedores ativos!'));
+        });
+
+        it('should resolves when the level exists and can be deleted', async () =>{
+            const removableLevelId = 1;
+            await expect(service.remove(removableLevelId)).resolves.not.toThrow();
         });
     });
 
-    it('should return a null when a nothing is found', async () => {
-        await expect(service.findAll({ name: 'a name that don\'t existis!'}))
-            .rejects
+    describe( 'on listing', () =>
+    {
+        it('should return a null when a nothing is found', async () => {
+            await expect(service.findAll()).rejects
             .toMatchObject( new NotFoundException('Nenhum registro foi encontrado!'));
+        });
     });
+
 });
