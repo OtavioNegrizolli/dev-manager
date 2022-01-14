@@ -1,5 +1,5 @@
 {
-  "name": "gazin-frontend",
+  "name": "devmgn-frontend",
   "private": true,
   "scripts": {
     "dev": "next dev",
