@@ -35,19 +35,19 @@ services:
         command: ["npm", "run", "start:dev"]
 
     ### FRONTEND ###
-    frontend:
-        build: ./frontend
-        container_name: nextjs_front
-        volumes:
-          - ./frontend/src:/usr/src/devmenager/frontend/src
-        ports:
-            - "3000:3000"
-        depends_on:
-            - backend
-        networks:
-            - frontend
-        # command: npm start
-        command: ["npm", "run", "dev"]
+    # frontend:
+    #     build: ./frontend
+    #     container_name: nextjs_front
+    #     volumes:
+    #       - ./frontend/src:/usr/src/devmenager/frontend/src
+    #     ports:
+    #         - "3000:3000"
+    #     restart: always
+    #     depends_on:
+    #         - backend
+    #     networks:
+    #         - frontend
+    #     command: ["npm", "run", "dev"]
 
 networks:
     backend:
