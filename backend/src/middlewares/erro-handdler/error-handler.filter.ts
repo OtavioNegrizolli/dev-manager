@@ -13,7 +13,7 @@ export class GlobalErrorHandlerFilter implements ExceptionFilter
     {
         const res = host.switchToHttp().getResponse<Response>();
         if (error instanceof InvalidDataError)
-            return res.status(HttpStatusCode.BAD_REQUEST).json({ messege: error.message });
+            return res.status(HttpStatusCode.BAD_REQUEST).json({ message: error.message });
         else if ( error instanceof InternalServerErrorException )
         {
             return res.status(HttpStatusCode.INTERNAL_SERVER_ERROR)
