@@ -9,6 +9,9 @@ services:
             POSTGRES_PASSWORD: 123456
             POSTGRES_USER: postgres
             POSTGRES_DB: banco
+            PGDATA: /data/postgres
+        volumes:
+          - database:/data/postgres
         networks:
             - backend
 
@@ -21,29 +24,35 @@ services:
             - "3001:3001"
         depends_on:
             - db
-        restart: always
+        # restart: always
+        environment:
+          - TYPEORM_HOST=postgres
         volumes:
-          - ./backend:/usr/backend
+          - ./backend:/usr/src/devmenager/backend
         networks:
             - backend
             - frontend
-        command: npm run dev
+        command: ["npm", "run", "start:dev"]
 
     ### FRONTEND ###
     frontend:
         build: ./frontend
         container_name: nextjs_front
         volumes:
-          - ./frontend:/usr/frontend
+          - ./frontend/src:/usr/src/devmenager/frontend/src
         ports:
             - "3000:3000"
         depends_on:
             - backend
         networks:
             - frontend
-        command: npm start
+        # command: npm start
+        command: ["npm", "run", "dev"]
 
 networks:
     backend:
 
     frontend:
+
+volumes:
+    database:
