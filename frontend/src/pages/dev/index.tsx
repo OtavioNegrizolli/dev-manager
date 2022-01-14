@@ -5,6 +5,7 @@ import { FaPen, FaSearch, FaTrashAlt, FaArrowDown, FaArrowUp, FaArrowsAltV } fro
 import Link from "next/link";
 import { useCallback } from "react";
 import ReactTooltip from "react-tooltip";
+import type { NextPage } from "next";
 
 import styles from '../../styles/list.module.css';
 import { toast } from "react-toastify";
@@ -13,7 +14,7 @@ import { DeveloperService } from "../../services/dev.service";
 
 type Attrs =  keyof Developer;
 
-const DevList = () =>
+const DevList: NextPage = () =>
 {
     const [devs, setDevs] = useState<Developer[] | null>(null);
     const nameInputRef = useRef<HTMLInputElement>(null);

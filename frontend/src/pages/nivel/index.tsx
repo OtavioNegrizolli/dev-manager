@@ -106,16 +106,18 @@ const LevelList = () =>
                 <div className="table-responsive w-100">
                     <table className="table table-striped table-hover">
                         <thead className={styles.thead}>
-                            <th scope="col" onClick={() => toggleOrderBy('id')}>
-                                <div>Id {getOrderByIcon('id')}</div>
-                            </th>
-                            <th scope="col" onClick={() => toggleOrderBy('name')}>
-                                <div>Nome{getOrderByIcon('name')}</div>
-                            </th>
-                            <th scope="col">
-                                <div>Num. Devs{getOrderByIcon('developers')}</div>
-                            </th>
-                            <th scope="col"></th>
+                            <tr>
+                                <th scope="col" onClick={() => toggleOrderBy('id')}>
+                                    <div>Id {getOrderByIcon('id')}</div>
+                                </th>
+                                <th scope="col" onClick={() => toggleOrderBy('name')}>
+                                    <div>Nome{getOrderByIcon('name')}</div>
+                                </th>
+                                <th scope="col">
+                                    <div>Num. Devs{getOrderByIcon('developers')}</div>
+                                </th>
+                                <th scope="col"></th>
+                            </tr>
                         </thead>
                         <tbody className={styles.tbody}>
                             {
@@ -139,7 +141,7 @@ const LevelList = () =>
                                     </tr>
                                 )) ||
                                 <tr>
-                                    <td colSpan={3}>
+                                    <td colSpan={4}>
                                         Nenhum nível encontrado. <Link href='level/0'><a>Adicionar um novo?</a></Link>
                                     </td>
                                 </tr>

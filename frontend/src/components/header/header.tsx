@@ -1,6 +1,6 @@
-import { route } from 'next/dist/server/router';
 import Link from 'next/link';
 import styles from './header.module.css';
+import Image from 'next/image'
 
 const sections = [
     {
@@ -26,11 +26,13 @@ export const Header = (props: { title: string }) => {
                 <div className='d-flex align-items-center'>
                     <Link href="/">
                         <h1 className={styles.logo}>
-                            <img
-                                loading="lazy"
+                            <Image
+                                height='40px'
+                                width='100px'
                                 alt="a ramdom logo image"
                                 aria-label="Logo"
-                                src="https://picsum.photos/200/300"></img>
+                                src="https://picsum.photos/200/300"
+                            />
                         </h1>
                     </Link>
                     <h1 className='h4 mx-4 title'>{props.title}</h1>
